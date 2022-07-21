@@ -1877,10 +1877,12 @@ margin-top: 40px;
 	box-shadow: #00000040 0px 0px 19px 0px;
     margin-bottom: 30px;
     text-align: center;
+	background-color: var(--primary);
 }
 
 .service .service-box i img {
 	height: 88px;
+	color: #000;
 }
 
 .service .service-box h3 {
