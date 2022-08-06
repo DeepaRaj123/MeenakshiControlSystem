@@ -87,7 +87,7 @@
                   </div>
                </div>
                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                  <li><a class="buy" href="join.html">Login</a></li>
+                  <li><a class="buy" onclick="sessionmanagement()" id="join" href="join.html">Login</a></li>
                </div>
             </div>
          </div>
@@ -174,13 +174,13 @@
                </dir>
                <dir class="col-sm-3">
                   <div class="for_box">
-                     <i><img src="icon/2.png"/></i>
+                     <i><img src="icon/3.png"/></i>
                      <h3>Washing Machine</h3>
                   </div>
                </dir>
                <dir class="col-sm-3">
                   <div class="for_box">
-                     <i><img src="icon/3.png"/></i>
+                     <i><img src="icon/2.png"/></i>
                      <h3>Fridge</h3>
                   </div>
                </dir>
@@ -350,7 +350,7 @@
                </div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                   <div class="yellow-box">
-                     <a href="#">Get  Quote</a>
+                     <a href="contact.html">Get  Quote</a>
                   </div>
                </div>
             </div>
@@ -454,6 +454,27 @@
          
       </script> 
        <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+       <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database-compat.js"></script>
+      
+      <script>
+          // Your web app's Firebase configuration
+                  const firebaseConfig = {
+         apiKey: "AIzaSyCVTvuAkyyTjMPbnda-gyQHupR6EODTjok",
+         authDomain: "meenakshi-control-system-6ad84.firebaseapp.com",
+         databaseURL: "https://meenakshi-control-system-6ad84-default-rtdb.asia-southeast1.firebasedatabase.app",
+         projectId: "meenakshi-control-system-6ad84",
+         storageBucket: "meenakshi-control-system-6ad84.appspot.com",
+         messagingSenderId: "227334513595",
+         appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
+         };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          var db = firebase.firestore();
+      
+        </script>
        <script>
          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"9488928080","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
            var wa_widgetSetting = {"title":"Saravanan","subTitle":"Hello, if you have any questions about our service then please send me a message.  If I am not offline then I will reply back straightaway.","headerBackgroundColor":"#b5f21d","headerColorScheme":"light","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#000","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"./images/logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
@@ -461,5 +482,32 @@
              _waEmbed(wa_btnSetting, wa_widgetSetting);
            };
          </script>
+
+<script>
+   const auth = firebase.auth();
+   auth.onAuthStateChanged(function(user){
+
+if(user){
+    var email = user.email;
+    document.getElementById("join").innerText = email+"-Logout";
+}else{
+    
+    document.getElementById("join").innerText = "Log In";
+}		
+});
+
+function sessionmanagement() {
+if( document.getElementById("join").innerText==="Log In")
+{
+    window.location = "join.html";
+}
+else
+{
+    auth.signOut();
+    window.location = "join.html";
+}
+
+}
+</script>
    </body>
 </html>

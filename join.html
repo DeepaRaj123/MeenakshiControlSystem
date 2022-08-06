@@ -87,7 +87,7 @@
                   </div>
                </div>
                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                <li><a class="buy" href="join.html">Login</a></li>
+                <li><a class="buy" onclick="sessionmanagement()" id="join" href="join.html">Login</a></li>
             </div>
             </div>
          </div>
@@ -99,7 +99,7 @@
     
     
 <div class="signup">
-    <div class="form1" style="background-color:greenyellow;">
+    <div class="form1" style="background-color:rgb(80, 123, 17);">
       
         <ul class="tab-group">
           <li class="tab active"><a href="#signup">Sign Up</a></li>
@@ -110,50 +110,45 @@
           <div id="signup">   
             <h1>Sign Up for Free</h1>
             
-            <form action="/" method="post">
-            
             <div class="top-row">
               <div class="field-wrap">
-                <input type="text" placeholder="First Name" required autocomplete="off" />
+                <input style="background-color: rgb(235, 244, 247); color: #000;" type="text" placeholder="First Name" required autocomplete="off" id="firstName"/>
               </div>
           
               <div class="field-wrap">
-                <input type="text" placeholder="Last Name" required autocomplete="off"/>
+                <input style="background-color: rgb(235, 244, 247); color: #000;" style="color: #000;" type="text" placeholder="Last Name" required autocomplete="off" id="lastName"/>
               </div>
             </div>
   
             <div class="field-wrap">
-              <input type="email"required placeholder="Email Address" autocomplete="off"/>
+              <input style="background-color: rgb(235, 244, 247); color: #000;" type="email"required placeholder="Email Address" autocomplete="off"  id="email"/>
             </div>
             
             <div class="field-wrap">
-              <input type="password"required placeholder="Set A Password" autocomplete="off"/>
+              <input style="background-color: rgb(235, 244, 247); color: #000;" type="password"required placeholder="Set A Password" autocomplete="off" id="password"/>
             </div>
             
-            <button type="submit" class="button button-block"/>Get Started</button>
+            <button onclick="register()" class="button button-block" id="register"/>Get Started</button>
             
-            </form>
   
           </div>
           
           <div id="login">   
             <h1>Welcome Back!</h1>
             
-            <form action="/" method="post">
             
               <div class="field-wrap">
-              <input type="email"required placeholder="Email Address" autocomplete="off"/>
+              <input style="background-color: rgb(235, 244, 247); color: #000;" type="email"required placeholder="Email Address" autocomplete="off" id="loginemail"/>
             </div>
             
             <div class="field-wrap">
-              <input type="password"required placeholder="Password" autocomplete="off"/>
+              <input style="background-color: rgb(235, 244, 247); color: #000;" type="password"required placeholder="Password" autocomplete="off" id="loginpsw"/>
             </div>
             
-            <p class="forgot"><a href="#">Forgot Password?</a></p>
+            <p class="forgot"><a onclick="resetpassword()">Forgot Password?</a></p>
             
-            <button class="button button-block"/>Log In</button>
+            <button id="loginbutton" onclick="login()" class="button button-block"/>Log In</button>
             
-            </form>
   
           </div>
           
@@ -179,7 +174,7 @@
                  <div class="contact">
                     <h3>conatct us</h3>
                     <span>75/188 3rd Street,<br>
-                       ramnagar, ss colony<br>
+                       Ramnagar, ss colony<br>
                        madurai 625016</span>
                  </div>
               </div>
@@ -298,5 +293,146 @@ $('.tab a').on('click', function (e) {
   
 });
         </script>
+         <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database-compat.js"></script>
+        
+        <script>
+            // Your web app's Firebase configuration
+                     const firebaseConfig = {
+         apiKey: "AIzaSyCVTvuAkyyTjMPbnda-gyQHupR6EODTjok",
+         authDomain: "meenakshi-control-system-6ad84.firebaseapp.com",
+         databaseURL: "https://meenakshi-control-system-6ad84-default-rtdb.asia-southeast1.firebasedatabase.app",
+         projectId: "meenakshi-control-system-6ad84",
+         storageBucket: "meenakshi-control-system-6ad84.appspot.com",
+         messagingSenderId: "227334513595",
+         appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
+         };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            var db = firebase.firestore();
+        
+          </script>
+
+<script>
+   const auth = firebase.auth();
+
+ //invokes firebase authentication.
+
+ function register() {
+ const email = document.querySelector("#email").value;
+ const firstName = document.querySelector("#firstName").value;
+ const lastName = document.querySelector("#lastName").value;
+ const password = document.querySelector("#password").value;
+
+  if (email.trim() == ""||firstName.trim() == ""||lastName.trim() == "") {
+    alert("Email /First Name /Last Name missing!");
+  }
+  else if (password.trim().length < 7) {
+    alert("Password must be at least 7 characters");
+  } 
+  else {
+   auth
+     .createUserWithEmailAndPassword(email, password)
+     .then(result=>{
+        alert("Account created Successfully!");
+     })
+     .catch(function (error) {
+       // Handle Errors here.
+       var errorCode = error.code;
+       var errorMessage = error.message;
+       alert(errorMessage);
+       // ...
+     });
+  }
+  document.querySelector("#email").value="";
+  document.querySelector("#firstName").value="";
+  document.querySelector("#lastName").value="";
+  document.querySelector("#email").password="";
+
+};
+
+function login() {
+    const email = document.querySelector("#loginemail").value;
+     const password = document.querySelector("#loginpsw").value;
+     if (email.trim() == "") {
+       alert("Enter Email");
+     }
+     else if (password.trim() == "") {
+       alert("Enter Password");
+     } 
+     else if(email.trim()==="iyappan@meenakshicontrolsystem.com" && password.trim()==="Meenakshi@123!"){
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(result=>{
+         window.location='staff.html';
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(errorMessage);
+          // ...
+        });
+     }
+   
+     else {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(result=>{
+            document.getElementById("join").innerText = email+"-Logout";
+            window.location='index.html';
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(errorMessage);
+          // ...
+        });
+     }
+  };
+
+  auth.onAuthStateChanged(function(user){
+           
+           if(user){
+               var email = user.email;
+               document.getElementById("join").innerText = email+"-Logout";
+           }else{
+               
+               document.getElementById("join").innerText = "Log In";
+           }		
+       });
+
+function sessionmanagement() {
+           if( document.getElementById("join").innerText==="Log In")
+           {
+               window.location = "join.html";
+           }
+           else
+           {
+               auth.signOut();
+               window.location = "join.html";
+           }
+     
+       }
+
+    function resetpassword()
+    {
+      const email = document.querySelector("#loginemail").value;
+
+      auth.sendPasswordResetEmail(email)
+      .then(function() {  
+      alert("Email sent.")
+      })
+      .catch(function(error) {
+         console.log(error)
+      });
+   }
+
+
+  
+</script>
   </body>
 </html>

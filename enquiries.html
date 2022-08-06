@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Meenakshi Control System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/enquiries.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/staff.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a id="username" href="#">
+                       User
+                    </a>
+                </li>
+                <li>
+                    <a href="staff.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                </li>
+                <li >
+                    <a href="enquiry.html" style="color: black;"><i class="fa fa-fw fa-folder"></i>Add Enquiry</a>
+                </li>
+                <li class="active">
+                  <a  href="enquiries.html" ><i class="fa fa-fw fa-folder"></i>Enquiries</a>
+                </li>
+                <li>
+                    <a href="editEnquiry.html"><i class="fa fa-fw fa-cog"></i>Edit Enquiry</a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                  <ul  class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Dropdown heading</li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
+                </li>
+                <li>
+                    <a onclick="sessionmanagement()" href="#"><i class="fa fa-fw fa-twitter"></i>Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+              <span class="hamb-top"></span>
+              <span class="hamb-middle"></span>
+              <span class="hamb-bottom"></span>
+            </button>
+            <div style=" height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #af77d6;">
+            <div class="input-box open">
+              <input id="phoneNumber" type="text" placeholder="Search with PhoneNumber...">
+              <span class="icon">
+                <i onclick="getData('phone')" class="fa fa-search"></i>
+              </span>
+              <i class="fa fa-close"></i>
+            </div>
+           
+          </div>
+          <div style=" height: 15vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #af77d6;">
+          <div id="myBtnContainer">
+            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <button class="btn" onclick="filterSelection('Enquiry Received')"> Enquiry Received</button>
+            <button class="btn" onclick="filterSelection('Work started')"> Work started</button>
+            <button class="btn" onclick="filterSelection('Hold')">Hold</button>
+            <button class="btn" onclick="filterSelection('Completed')">Completed</button>
+          </div>
+        </div>
+            <div class="all-elephant-cards">
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src="./js/staff.js"></script>
+<script src="./js/enquiries.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database-compat.js"></script>
+
+<script>
+   // Your web app's Firebase configuration
+            const firebaseConfig = {
+apiKey: "AIzaSyCVTvuAkyyTjMPbnda-gyQHupR6EODTjok",
+authDomain: "meenakshi-control-system-6ad84.firebaseapp.com",
+databaseURL: "https://meenakshi-control-system-6ad84-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "meenakshi-control-system-6ad84",
+storageBucket: "meenakshi-control-system-6ad84.appspot.com",
+messagingSenderId: "227334513595",
+appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
+};
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+   var db = firebase.firestore();
+
+ </script>
+
+<script>
+    const auth = firebase.auth();
+    auth.onAuthStateChanged(function(user){
+   
+   if(user){
+       var email = user.email;
+       document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
+      // document.getElementById("staffName").innerText = capitalizeFirstLetter(email.split('@')[0]);
+   }		
+});
+
+function sessionmanagement() {
+       auth.signOut();
+       window.location = "join.html";
+}
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function savequery()
+{
+  var name =  document.getElementById("name").value;
+  var email =  document.getElementById("email").value;
+  var phone =  document.getElementById("phone").value;
+  var address =  document.getElementById("address").value;
+  var service = document.getElementById('service');
+  var service_value = service.options[service.selectedIndex].value;
+  var brand = document.getElementById('brand');
+  var brand_value = brand.options[brand.selectedIndex].value;
+  var message = document.getElementById('message').value;
+  var staffName = document.getElementById("staffName").innerText;
+  console.log(/^\d{10}$/.test(phone));
+
+  if(phone===""||service_value===""||brand_value===""||message===""){
+    alert("Phone/typeOfService/brand/Issue missing!")
+  }
+  else if(!(/^\d{10}$/.test(phone)))
+  {
+    alert("Invalid PhoneNumber")
+  }
+  else{
+let newQuery = {
+  name: name,
+  email: email,
+  phone: phone,
+  address:address,
+  service_value:service_value,
+  brand_value:brand_value,
+  message:message,
+  staffName:staffName
+};
+
+// Add a new document in collection "cities" with ID 'LA'
+db.collection('Enquiries').doc().set(newQuery).then(result=>{
+  alert("Enquiry Added Successfully");
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  document.getElementById('service').value="";
+  document.getElementById('brand').value="";
+  document.getElementById('message').value="";
+  document.getElementById("staffName").innerText="";
+}).catch(err=>{
+  alert(err)})
+}
+}
+ 
+  </script>
+  <script>
+  function getData(type){
+    var booksRef;
+    if(type===null){
+    booksRef = db.collection("Enquiries")
+    }
+    else if(type==="phone"){
+    var phoneNumber = document.getElementById("phoneNumber").value;
+    if(phoneNumber===""){
+      booksRef = db.collection("Enquiries")
+    }
+    else
+    booksRef = db.collection("Enquiries").where("phone","==",phoneNumber);
+    }
+    else{
+    booksRef = db.collection("Enquiries").where("status", "==", type)
+    }
+
+booksRef
+  .get()
+  .then((snapshot) => {
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    let htmlCode = ``;
+
+    if(data.length===0){
+      htmlCode =    `
+
+<p style="color:black"> No results found! </p>
+
+`;
+    }
+else{
+
+for(var i=0;i<data.length;i++){
+  if(data[i].status==="Hold"){
+  var color='linear-gradient(45deg, rgb(250,250,0), rgb(255,255,255))';}
+  else if(data[i].status==="Completed"){
+  var color='linear-gradient(65deg, rgb(0,250,0), rgb(255,255,255))';}
+  else if(data[i].status==="Work started"){
+  var color='linear-gradient(45deg, rgb(0,150,150), rgb(255,255,255))';}
+  else{
+  var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
+  htmlCode =
+    htmlCode +
+    `
+    <article>
+      <div class="mainheading">
+      <div id="title" style="background-image: ${color};">
+      <h6 style="data-color: ${color};" id="heading">Status: ${data[i].status}</h6></div>
+      <p id="id">EnquiryId: ${data[i].id} </p>
+      <p>Phone: ${data[i].phone}</p>
+      <p>Type of service: ${data[i].service_value}</p>
+      <p>Brand: ${data[i].brand_value}</p>
+      <p class="max-lines ">Issue/Message: ${data[i].message}</p>
+      <button onclick="editButton(${i})">Edit Enquiry</button>
+      </div>
+    </article>
+  `;
+
+}
+}
+
+const elephantCards = document.querySelector(".all-elephant-cards");
+elephantCards.innerHTML = htmlCode;
+
+
+});
+
+    }
+  </script>
+  <script>
+    function editButton(value)
+{
+  localStorage["id"] = value;
+  window.location = "editEnquiry.html";
+}
+function changeStyle(){
+        var element = document.getElementById("title");
+        element.style.backgroundImage  ='linear-gradient(65deg, rgb(0,250,0), rgb(255,255,255))';
+        element.style.backgroundImage  ='linear-gradient(45deg, rgb(250,250,0), rgb(255,255,255))';
+        element.style.backgroundImage  ='linear-gradient(45deg, rgb(0,100,100), rgb(255,255,255))';
+        document.getElementById("heading").style.color  ="white";
+
+    }
+
+function  filterSelection(type){
+
+      if(type==='all'){
+        getData(null);
+      }
+      else
+      {
+        getData(type);
+      }
+}
+getData(null);
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Meenakshi Control System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/staff.css">
+
+</head>
+<body>
+  
+<!-- partial:index.partial.html -->
+<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a id="username" href="#">
+                       User
+                    </a>
+                </li>
+                <li>
+                    <a href="staff.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                </li>
+                <li class="active" >
+                    <a href="enquiry.html" style="color: black;"><i class="fa fa-fw fa-folder"></i>Add Enquiry</a>
+                </li>
+                <li>
+                  <a  href="enquiries.html" ><i class="fa fa-fw fa-folder"></i>Enquiries</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-cog"></i> Third page</a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Dropdown heading</li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
+                </li>
+                <li>
+                    <a onclick="sessionmanagement()" href="#"><i class="fa fa-fw fa-twitter"></i>Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+              <span class="hamb-top"></span>
+              <span class="hamb-middle"></span>
+              <span class="hamb-bottom"></span>
+            </button>
+        <section id="contact">
+            <div class="contact-box">
+              <div class="contact-links">
+                <h2>Add a new Enquiry</h2>
+              
+              </div>
+              <div class="contact-form-wrapper">
+                  <div class="form-item">
+                    <input type="text" id="name">
+                    <label>Name:</label>
+                  </div>
+                  <div class="form-item">
+                    <input type="text" id="email">
+                    <label>Email:</label>
+                  </div>
+                  <div class="form-item">
+                    <input type="tel" id="phone">
+                    <label>Phone:*</label>
+                  </div>
+
+                  <div class="form-item">
+                    <textarea class="" id="address" required></textarea>
+                    <label>Address</label>
+                  </div>
+
+                  <label id="staffName"></label>
+            
+                <select id="service" style="width: 100%; border-color: #ccc; height: 50px; margin-bottom: 20px;">
+                  <option  value="">--Select type of service--*</option>
+                
+                  <option value="AC">AC</option>
+                  <option value="Washingmachine">Washingmachine</option>
+                  <option value="Fridge">Fridge</option>
+              </select>
+              <select id="brand" style="width: 100%; border-color: #ccc; height: 50px; margin-bottom: 20px;">
+                <option value="">--Select Brand--*</option>
+                <option value="Videocon">Videocon</option>
+                <option value="Whirlpool">Whirlpool</option>
+                <option value="Bosch">Bosch</option>
+                <option value="Mitsubishi Electric">Mitsubishi Electric</option>
+                <option value="Voltas">Voltas</option>
+                <option value="Haier">Haier</option>
+                <option value="Daikin">Daikin</option>
+                <option value="LLoyd">LLoyd</option>
+                <option value="General">General</option>
+                <option value="Carrier">Carrier</option>
+                <option value="Onida">Onida</option>
+                <option value="LG">LG</option>
+                <option value="IFB">IFB</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Siemens">Siemens</option>
+
+            </select>
+                  <div class="form-item">
+                    <textarea class="" id="message" required></textarea>
+                    <label>Additional Message/ Issue description</label>
+                  </div>
+                  <button onclick="savequery()" class="submit-btn">Add Enquiry</button>  
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script  src="./js/staff.js"></script>
+<script  src="./index.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database-compat.js"></script>
+
+<script>
+   // Your web app's Firebase configuration
+            const firebaseConfig = {
+apiKey: "AIzaSyCVTvuAkyyTjMPbnda-gyQHupR6EODTjok",
+authDomain: "meenakshi-control-system-6ad84.firebaseapp.com",
+databaseURL: "https://meenakshi-control-system-6ad84-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "meenakshi-control-system-6ad84",
+storageBucket: "meenakshi-control-system-6ad84.appspot.com",
+messagingSenderId: "227334513595",
+appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
+};
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+   var db = firebase.firestore();
+
+ </script>
+
+<script>
+    const auth = firebase.auth();
+    auth.onAuthStateChanged(function(user){
+   
+   if(user){
+       var email = user.email;
+       document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
+       document.getElementById("staffName").innerText = capitalizeFirstLetter(email.split('@')[0]);
+   }		
+});
+
+function sessionmanagement() {
+       auth.signOut();
+       window.location = "join.html";
+}
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function savequery()
+{
+  var name =  document.getElementById("name").value;
+  var email =  document.getElementById("email").value;
+  var phone =  document.getElementById("phone").value;
+  var address =  document.getElementById("address").value;
+  var service = document.getElementById('service');
+  var service_value = service.options[service.selectedIndex].value;
+  var brand = document.getElementById('brand');
+  var brand_value = brand.options[brand.selectedIndex].value;
+  var message = document.getElementById('message').value;
+  var staffName = document.getElementById("staffName").innerText;
+  console.log(/^\d{10}$/.test(phone));
+
+  if(phone===""||service_value===""||brand_value===""||message===""){
+    alert("Phone/typeOfService/brand/Issue missing!")
+  }
+  else if(!(/^\d{10}$/.test(phone)))
+  {
+    alert("Invalid PhoneNumber")
+  }
+  else{
+    let newQuery = {
+  name: name,
+  email: email,
+  phone: phone,
+  address:address,
+  service_value:service_value,
+  brand_value:brand_value,
+  message:message,
+  staffName:staffName,
+  status:"Enquiry Received"
+};
+
+// Add a new document in collection "cities" with ID 'LA'
+db.collection('Enquiries').doc().set(newQuery).then(result=>{
+  alert("Enquiry Added Successfully");
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  document.getElementById('service').value="";
+  document.getElementById('brand').value="";
+  document.getElementById('message').value="";
+  document.getElementById("staffName").innerText="";
+  window.location = "enquiries.html";
+}).catch(err=>{
+  alert(err)})
+}
+
+}
+  
+
+
+  </script>
+</body>
+</html>
