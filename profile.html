@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Meenakshi Control System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/staff.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a id="username" href="#">
+                       User
+                    </a>
+                </li>
+                <li>
+                    <a  href="staff.html"><i class="fa fa-fw fa-home active"></i> Home</a>
+                </li>
+                <li>
+                    <a href="enquiry.html"><i class="fa fa-fw fa-plus"></i>Add Enquiry</a>
+                </li>
+                <li>
+                    <a  href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
+                </li>
+                <li>
+                    <a href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
+                </li>
+                <li  class="active">
+                    <a href="profile.html"><i class="fa fa-fw fa-user"></i>My Profile</a>
+                </li>
+    
+              <li>
+                  <a onclick="sessionmanagement()" href="#"><i class="fa fa-sign-out"></i>Logout</a>
+              </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+        
+        </div>
+        <!-- /#page-content-wrapper -->
+   <!-- Navbar top -->
+   <div class="profilecontainer" id="profilecontainer" style="display: none;">
+   <div class="navbar-top">
+
+<!-- Main -->
+<div class="main">
+    <h2 style="margin-top: 50px;">My Profile</h2>
+    <div class="card" style="margin-top: 10%;">
+        <div class="card-body">
+            <i class="fa fa-pen fa-xs edit"></i>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>:</td>
+                        <td id="Name">ImDezCode</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td id="Email">imdezcode@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>:</td>
+                        <td id="Address">Bali, Indonesia</td>
+                    </tr>
+                    <tr>
+                        <td>PhoneNumber</td>
+                        <td>:</td>
+                        <td id="PhoneNumber">Diving, Reading Book</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<button style="background-color: rgb(218, 97, 218); border:solid 1px; border-radius: 5px; color: white; margin-left:38%; font-size: 22px; padding: 10px;" onclick="gotoupdate()">Update Profile</button>
+</div></div>
+    </div>
+
+    <section id="contact">
+        <div class="contact-box" >
+          <div class="contact-links"  style="background-image: url('./images/logo.png');">
+            <h2>Edit Profile</h2>
+          
+          </div>
+          <div class="contact-form-wrapper">
+              <div class="form-item">
+                <input type="text" id="name">
+                <label>Name:</label>
+              </div>
+              <div class="form-item">
+                <input type="text" id="email">
+                <label>Email:</label>
+              </div>
+              <div class="form-item">
+                <input type="tel" id="phone">
+                <label>Phone:*</label>
+              </div>
+
+              <div class="form-item">
+                <textarea class="" id="address" required></textarea>
+                <label>Address</label>
+              </div>
+
+              <button onclick="saveprofile()" class="submit-btn">Update Profile</button>  
+          </div>
+        </div>
+      </section>
+    <!-- /#wrapper -->
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script  src="./js/staff.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database-compat.js"></script>
+
+<script>
+   // Your web app's Firebase configuration
+            const firebaseConfig = {
+apiKey: "AIzaSyCVTvuAkyyTjMPbnda-gyQHupR6EODTjok",
+authDomain: "meenakshi-control-system-6ad84.firebaseapp.com",
+databaseURL: "https://meenakshi-control-system-6ad84-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "meenakshi-control-system-6ad84",
+storageBucket: "meenakshi-control-system-6ad84.appspot.com",
+messagingSenderId: "227334513595",
+appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
+};
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+   var db = firebase.firestore();
+
+ </script>
+
+<script>
+    const auth = firebase.auth();
+    auth.onAuthStateChanged(function(user){
+   
+   if(user){
+       var email = user.email;
+       document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
+       localStorage.setItem("staffName", capitalizeFirstLetter(email.split('@')[0]));
+       localStorage.setItem("staffEmail", email);
+
+   }		
+});
+
+function sessionmanagement() {
+       auth.signOut();
+       window.location = "join.html";
+}
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function saveprofile()
+{
+  var id = localStorage.getItem("id")
+
+  var name =  document.getElementById("name").value;
+  var email =  document.getElementById("email").value;
+  var phone =  document.getElementById("phone").value;
+  var address =  document.getElementById("address").value;
+
+
+  if(phone===""){
+    alert("PhoneNumber is missing!")
+  }
+  else if(!(/^\d{10}$/.test(phone)))
+  {
+    alert("Invalid PhoneNumber")
+  }
+  else {
+    
+    let newQuery = {
+  name: name,
+  email: email,
+  phone: phone,
+  address:address
+};
+
+if(id===null){
+    db.collection('StaffProfiles').doc().set(newQuery).then(result=>{
+  alert("Profile Added Successfully");
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  updateprofile.style.display = "none";
+  profilecontainer.style.display = "block"
+}).catch(err=>{
+  alert(err)})
+}
+
+else{
+// Add a new document in collection "cities" with ID 'LA'
+db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
+  alert("Profile Updated Successfully");
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  updateprofile.style.display = "none";
+  profilecontainer.style.display = "block"
+}).catch(err=>{
+  alert(err)})
+}
+}
+
+
+}
+
+  </script>
+
+  <script>
+  document.getElementById("name").value=localStorage.getItem("staffName");
+  document.getElementById("email").value=localStorage.getItem("staffEmail");
+
+    var profilecontainer = document.getElementById("profilecontainer");
+    var updateprofile = document.getElementById("contact");
+    const staffRef = db
+
+  db.collection("StaffProfiles").where("name","==",localStorage.getItem("staffName"))
+                    .get()
+                    .then(function(querySnapshot) {
+                        querySnapshot.forEach(function(doc) {
+                            var data = doc.data();
+                            console.log(data)
+                            if(data.length===0){
+                                 updateprofile.style.display = "block";
+                                 profilecontainer.style.display = "none";
+                            }
+                            else{
+                                updateprofile.style.display = "none";
+                                profilecontainer.style.display = "block";
+                                document.getElementById("Name").innerHTML =data.name;
+                                document.getElementById("Email").innerHTML =data.email;
+                                document.getElementById("PhoneNumber").innerHTML =data.phone;
+                                document.getElementById("Address").innerHTML =data.address;
+                            }
+                        
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log("Error getting documents: ", error);
+                    });
+
+
+function  gotoupdate(){
+    var profilecontainer = document.getElementById("profilecontainer");
+    var updateprofile = document.getElementById("contact");
+    updateprofile.style.display = "block";
+    updateprofile.style.marginLeft = "10%";
+    updateprofile.style.marginTop = "-5%";
+    profilecontainer.style.display = "none";
+    db.collection("StaffProfiles").where("name","==",localStorage.getItem("staffName"))
+                    .get()
+                    .then(function(querySnapshot) {
+                        querySnapshot.forEach(function(doc) {
+                            var data = doc.data();
+                                document.getElementById("name").value =data.name;
+                                document.getElementById("email").value =data.email;
+                                document.getElementById("phone").value =data.phone;
+                                document.getElementById("address").value =data.address;
+                                localStorage.setItem("id", doc.id);
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log("Error getting documents: ", error);
+                    });
+}
+localStorage.setItem("id", null);
+
+  </script>
+</body>
+</html>

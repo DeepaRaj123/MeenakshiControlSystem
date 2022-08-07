@@ -25,34 +25,21 @@
                     <a href="staff.html"><i class="fa fa-fw fa-home"></i> Home</a>
                 </li>
                 <li class="active" >
-                    <a href="enquiry.html" style="color: black;"><i class="fa fa-fw fa-folder"></i>Add Enquiry</a>
+                  <a href="enquiry.html"><i class="fa fa-fw fa-plus"></i>Add Enquiry</a>
                 </li>
                 <li>
-                  <a  href="enquiries.html" ><i class="fa fa-fw fa-folder"></i>Enquiries</a>
+                  <a  href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-cog"></i> Third page</a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
+                  <a href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
-                </li>
-                <li>
-                    <a onclick="sessionmanagement()" href="#"><i class="fa fa-fw fa-twitter"></i>Logout</a>
-                </li>
+                  <a href="profile.html"><i class="fa fa-fw fa-user"></i>My Profile</a>
+              </li>
+    
+              <li>
+                  <a onclick="sessionmanagement()" href="#"><i class="fa fa-sign-out"></i>Logout</a>
+              </li>
             </ul>
         </nav>
         <!-- /#sidebar-wrapper -->
@@ -94,8 +81,8 @@
                 <select id="service" style="width: 100%; border-color: #ccc; height: 50px; margin-bottom: 20px;">
                   <option  value="">--Select type of service--*</option>
                 
-                  <option value="AC">AC</option>
-                  <option value="Washingmachine">Washingmachine</option>
+                  <option value="AC">Air Conditioner (AC)</option>
+                  <option value="Washingmachine">Washing Machine</option>
                   <option value="Fridge">Fridge</option>
               </select>
               <select id="brand" style="width: 100%; border-color: #ccc; height: 50px; margin-bottom: 20px;">
@@ -164,6 +151,7 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
        var email = user.email;
        document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
        document.getElementById("staffName").innerText = capitalizeFirstLetter(email.split('@')[0]);
+       localStorage.setItem("staffName", capitalizeFirstLetter(email.split('@')[0]));
    }		
 });
 
