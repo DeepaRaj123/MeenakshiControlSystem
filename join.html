@@ -362,7 +362,7 @@ function login() {
      else if (password.trim() == "") {
        alert("Enter Password");
      } 
-     else if(email.trim()==="iyappan@meenakshicontrolsystem.com" && password.trim()==="Meenakshi@123!"){
+     else if(email.trim()==="iyappan@meenakshicontrolsystem.com" || email.trim()==="rajesh@meenakshicontrolsystem.com"||email.trim()==="malathi@meenakshicontrolsystem.com"||email.trim()==="bharathi@meenakshicontrolsystem.com"||email.trim()==="ammu@meenakshicontrolsystem.com" && password.trim()==="Meenakshi@123!"){
       auth
         .signInWithEmailAndPassword(email, password)
         .then(result=>{

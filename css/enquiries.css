@@ -35,7 +35,7 @@ body {
   }
   .all-elephant-cards article div{
     width: 350px;
-    height: 450px;
+    height: 550px;
     margin-top: 20px;
     background-color: rgb(183, 0, 255); /* For browsers that do not support gradients */
     background-image: linear-gradient(rgb(183, 45, 201), rgb(199, 126, 211));

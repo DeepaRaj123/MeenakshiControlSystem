@@ -146,6 +146,10 @@
                 <option value="Siemens">Siemens</option>
 
             </select>
+            <div class="form-item">
+              <input type="Date" id="deliveryDate">
+              <label>Expected Date of Delivery:*</label>
+            </div>
                   <div class="form-item">
                     <textarea class="" id="message" required></textarea>
                     <label>Additional Message/ Issue description</label>
@@ -210,7 +214,9 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
 
 function sessionmanagement() {
        auth.signOut();
+       localStorage.setItem("staffName","");
        window.location = "join.html";
+
 }
 
 value = localStorage["id"];
@@ -226,7 +232,7 @@ if(value!=undefined){
       id: doc.id,
       ...doc.data(),
     }));
-
+  var entryDate;
   dataObject = data[value];
   document.getElementById("name").value=dataObject.name;
   document.getElementById("email").value=dataObject.email;
@@ -236,6 +242,12 @@ if(value!=undefined){
   document.getElementById('service').value=dataObject.service_value;
   document.getElementById('brand').value=dataObject.brand_value;
   document.getElementById('message').value=dataObject.message;
+  const [month, day, year] = dataObject.deliveryDate.split('-');
+  const deliveryDate = year+"-"+month+"-"+day
+  console.log(deliveryDate)
+  document.getElementById('deliveryDate').value=deliveryDate;
+  entryDate = dataObject.entryDate;
+//  document.getElementById('deliveryDate').value="2008-09-05"
   if(dataObject.status==="Hold"){
     document.getElementById("reasonitem").style.display = "block";
     document.getElementById("reason").value = dataObject.reason;
@@ -245,7 +257,7 @@ if(value!=undefined){
     document.getElementById("price").value = dataObject.price;
     document.getElementById("technician").style.display = "block";
     document.getElementById("technician").value = dataObject.technician;
-    console.log(dataObject.qrCodeURL)
+
     if(dataObject.qrCodeURL===undefined){
       document.getElementById("videoitem").style.display = "block";
     }
@@ -258,8 +270,6 @@ if(value!=undefined){
     }
 });
 }
-
-
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -282,8 +292,10 @@ function savequery()
   var price =  document.getElementById("price").value;
   var reason =  document.getElementById("reason").value;
   var technician = document.getElementById('technician');
+  const [month, day, year] = document.getElementById("deliveryDate").value.split('-');
+  const deliveryDate = year+"-"+day+"-"+month
   var technician_value = technician.options[technician.selectedIndex].value;
-  console.log(/^\d{10}$/.test(phone));
+  var completedDate;  
 
   if(phone===""||service_value===""||brand_value===""||message===""){
     alert("Phone/typeOfService/brand/Issue missing!")
@@ -295,7 +307,13 @@ function savequery()
   else{
   var videoURL = document.getElementById("enter").value;
   var imgDataUrl = textToQrImageDataUrl(videoURL);
-  console.log(imgDataUrl)
+  if(status_value=="Completed"){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    completedDate = dd + '/' + mm + '/' + yyyy;   
+  }
   let newQuery = {
   name: name,
   email: email,
@@ -309,11 +327,13 @@ function savequery()
   price:price?price:0,
   reason:reason?reason:"",
   technician:technician_value,
-  qrCodeURL:imgDataUrl?imgDataUrl:""
+  qrCodeURL:imgDataUrl?imgDataUrl:"",
+  deliveryDate:deliveryDate,
+  completedDate:completedDate?completedDate:""
 };
 
 // Add a new document in collection "cities" with ID 'LA'
-db.collection('Enquiries').doc(dataObject.id).set(newQuery).then(result=>{
+db.collection('Enquiries').doc(dataObject.id).update(newQuery).then(result=>{
   alert("Enquiry Updated Successfully");
   document.getElementById("name").value="";
   document.getElementById("email").value="";
@@ -323,6 +343,8 @@ db.collection('Enquiries').doc(dataObject.id).set(newQuery).then(result=>{
   document.getElementById('brand').value="";
   document.getElementById('message').value="";
   document.getElementById('status').value="";
+  document.getElementById('deliveryDate').value="";
+  document.getElementById('price').value="";
   document.getElementById("staffName").innerText="";
   window.location = "enquiries.html";
 }).catch(err=>{
@@ -345,6 +367,7 @@ function toggle(){
     document.getElementById("priceitem").style.display = "block";
     document.getElementById("technician").style.display = "block";
     document.getElementById("videoitem").style.display = "block";
+ 
   }
   else{
     document.getElementById("priceitem").style.display = "none";
@@ -371,7 +394,7 @@ function handleValueChange(){
     var videoURL = document.getElementById("enter").value;
     document.getElementById('qrImg').style.display = "block";
     document.getElementById('qrImg').style.marginBottom = "20px";
-  var imgDataUrl = textToQrImageDataUrl(videoURL);
+  var imgDataUrl = textToQrImageDataUrl(videoURL+"\nDeepa");
   document.getElementById('qrImg').setAttribute("src", imgDataUrl);}
   function textToQrImageDataUrl(txt) {
     var qrDiv = document.createElement("div");
@@ -388,6 +411,7 @@ function printImg(){
   win.document.write('<img src="' + imgsrc + '" onload="window.print();window.close()" />');
   win.focus();
 }
+
   </script>
 </body>
 </html>

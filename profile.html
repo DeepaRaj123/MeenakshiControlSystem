@@ -219,6 +219,7 @@ db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
   document.getElementById("address").value="";
   updateprofile.style.display = "none";
   profilecontainer.style.display = "block"
+  gotoupdate()
 }).catch(err=>{
   alert(err)})
 }
@@ -240,6 +241,8 @@ db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
   db.collection("StaffProfiles").where("name","==",localStorage.getItem("staffName"))
                     .get()
                     .then(function(querySnapshot) {
+
+
                         querySnapshot.forEach(function(doc) {
                             var data = doc.data();
                             console.log(data)

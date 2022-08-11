@@ -183,19 +183,20 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
   <script>
   function getData(type){
     var booksRef;
+    var staffName = localStorage.getItem("staffName");
     if(type===null){
-    booksRef = db.collection("Enquiries")
+    booksRef = db.collection("Enquiries").where("staffName","==",staffName);
     }
     else if(type==="phone"){
     var phoneNumber = document.getElementById("phoneNumber").value;
     if(phoneNumber===""){
-      booksRef = db.collection("Enquiries")
+      booksRef = db.collection("Enquiries").where("staffName","==",staffName);
     }
     else
-    booksRef = db.collection("Enquiries").where("phone","==",phoneNumber);
+    booksRef = db.collection("Enquiries").where("phone","==",phoneNumber).where("staffName","==",staffName);;
     }
     else{
-    booksRef = db.collection("Enquiries").where("status", "==", type)
+    booksRef = db.collection("Enquiries").where("status", "==", type).where("staffName","==",staffName);
     }
 
 booksRef
@@ -226,6 +227,9 @@ for(var i=0;i<data.length;i++){
   var color='linear-gradient(45deg, rgb(0,150,150), rgb(255,255,255))';}
   else{
   var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
+  var entryDate = data[i].entryDate;
+  var deliveryDate = data[i].deliveryDate
+  
   htmlCode =
     htmlCode +
     `
@@ -233,11 +237,14 @@ for(var i=0;i<data.length;i++){
       <div class="mainheading">
       <div id="title" style="background-image: ${color};">
       <h6 style="data-color: ${color};" id="heading">Status: ${data[i].status}</h6></div>
+      <p id="id">Entry date: ${entryDate} </p>
       <p id="id">EnquiryId: ${data[i].id} </p>
+      <p id="name">Name: ${data[i].name} </p>
       <p>Phone: ${data[i].phone}</p>
       <p>Type of service: ${data[i].service_value}</p>
       <p>Brand: ${data[i].brand_value}</p>
       <p class="max-lines ">Issue/Message: ${data[i].message}</p>
+      <p id="id">Delivery Date: ${deliveryDate} </p>
       <button onclick="editButton(${i})">Edit Enquiry</button>
       </div>
     </article>
