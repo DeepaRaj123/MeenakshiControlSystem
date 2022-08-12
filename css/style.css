@@ -1704,12 +1704,11 @@ float: left;
 .top-box {
 	display: flex;
 	justify-content:center;
-	padding-top: 20px;
+	padding-top: 10px;
   }
 
 .top-box p {
     color: #000;
-	margin-left: 5px;
 }
 ul.sociel_link li {
 	display: inline-block;

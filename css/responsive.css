@@ -191,7 +191,7 @@
         line-height: 50px;
     }
     
-  .buy {display: none;}
+  .buy {display: block;}
     .banner-main .carousel-caption {
         background: transparent;
     }
@@ -286,7 +286,7 @@ padding: 1px 0px 1px 0px;
      .head_top {
         display: block;
     }
-    .buy {display: none; } 
+    .buy {display: block; } 
     
     .choose_bg .white_bg .for_box {margin-bottom: 30px;}
     .read-more {margin-top: 10px;}
@@ -346,7 +346,7 @@ padding: 1px 0px 1px 0px;
     .head_top {
         display: block;
     }
-    .buy {display: none;  } 
+    .buy {display: block;  } 
     .main_bt {
         padding: 5px 24px 5px 24px;
         margin-right: 10px;
