@@ -70,3 +70,9 @@ dropDowns.forEach((dropDown) => {
   });
  });
 });
+
+$(document).ready(function () {
+  var today = new Date().toISOString().split('T')[0];
+  $("#deliveryDate").attr('min', today);
+});
+

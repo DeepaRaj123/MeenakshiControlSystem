@@ -31,7 +31,7 @@
                   <a  href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
                 </li>
                 <li>
-                    <a href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
+                    <a onclick="editEnquiryElement()" href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
                 </li>
                 <li>
                   <a href="profile.html"><i class="fa fa-fw fa-user"></i>My Profile</a>
@@ -230,6 +230,7 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
     var staffName = localStorage.getItem("staffName");
     if(type===null){
     booksRef = db.collection("Enquiries").where("staffName","==",staffName)
+
     }
     else if(type==="phone"){
     var phoneNumber = document.getElementById("phoneNumber").value;
@@ -272,6 +273,26 @@ for(var i=0;i<data.length;i++){
   var color='linear-gradient(45deg, rgb(0,150,150), rgb(255,255,255))';}
   else{
   var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
+  var entryDate = data[i].entryDate;
+  var deliveryDate = data[i].deliveryDate;
+  var enquiryName = "Edit Enquiry";
+
+  if(data[i].status==="Completed"){
+    var enquiryName = "Enquiry closed"
+    var value = "closed"
+  }
+  else{
+    var enquiryName = "Edit Enquiry"
+    var value = i;
+  }
+
+  if(data[i].price===undefined){
+    var priceValue = 0
+  }
+  else{
+    var priceValue = data[i].price
+  }
+
   htmlCode =
     htmlCode +
     `
@@ -279,16 +300,19 @@ for(var i=0;i<data.length;i++){
       <div class="mainheading">
       <div id="title" style="background-image: ${color};">
       <h6 style="data-color: ${color};" id="heading">Status: ${data[i].status}</h6></div>
+      <p id="id">Entry date: ${entryDate} </p>
       <p id="id">EnquiryId: ${data[i].id} </p>
+      <p id="name">Name: ${data[i].name} </p>
       <p>Phone: ${data[i].phone}</p>
       <p>Type of service: ${data[i].service_value}</p>
       <p>Brand: ${data[i].brand_value}</p>
+      <p>Price: ${priceValue}</p>
       <p class="max-lines ">Issue/Message: ${data[i].message}</p>
-      <button onclick="editButton(${i})">Edit Enquiry</button>
+      <p id="id">Delivery Date: ${deliveryDate} </p>
+      <button onclick="editButton(${value})">${enquiryName}</button>
       </div>
     </article>
   `;
-
 }
 }
 
@@ -303,8 +327,13 @@ elephantCards.innerHTML = htmlCode;
   <script>
     function editButton(value)
 {
-  localStorage["id"] = value;
-  window.location = "editEnquiry.html";
+  if(value===false){
+    alert("This Enquiry is already closed")
+  }
+  else{
+    localStorage.setItem("id",value);
+    window.location = "editEnquiry.html";
+  }
 }
 function changeStyle(){
         var element = document.getElementById("title");
@@ -316,7 +345,6 @@ function changeStyle(){
     }
 
 function  filterSelection(type){
-
       if(type==='all'){
         getData(null);
       }
@@ -327,6 +355,9 @@ function  filterSelection(type){
 }
 getData(null);
 var Hold=0,Enquiry=0,completed=0,work=0;
+var staffName = localStorage.getItem("staffName");
+
+
 db.collection("Enquiries").where("staffName","==",staffName)
 .get()
   .then((snapshot) => {
@@ -351,6 +382,14 @@ document.getElementById('Work Started').innerHTML  = work;
 
   });
 
+  function editEnquiryElement(){
+  localStorage.setItem("id",undefined);
+}
+$("#phoneNumber").keypress(function(event) {
+            if (event.keyCode === 13) {
+                getData('phone')
+            }
+        });
   </script>
 </body>
 </html>

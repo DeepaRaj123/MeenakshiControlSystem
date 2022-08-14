@@ -24,14 +24,14 @@
                 <li>
                     <a href="staff.html"><i class="fa fa-fw fa-home"></i> Home</a>
                 </li>
-                <li class="active" >
+                <li >
                   <a href="enquiry.html"><i class="fa fa-fw fa-plus"></i>Add Enquiry</a>
                 </li>
                 <li>
                   <a  href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
                 </li>
-                <li>
-                  <a href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
+                <li class="active" >
+                  <a onclick="editEnquiryElement()" href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
                 </li>
              
                 <li>
@@ -208,9 +208,12 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
        var email = user.email;
        document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
        document.getElementById("staffName").innerText = capitalizeFirstLetter(email.split('@')[0]);
+       document.getElementById("staffName").style.display = "none";
        localStorage.setItem("staffName", capitalizeFirstLetter(email.split('@')[0]));
    }		
 });
+
+
 
 function sessionmanagement() {
        auth.signOut();
@@ -218,12 +221,14 @@ function sessionmanagement() {
        window.location = "join.html";
 
 }
-
-value = localStorage["id"];
+value = localStorage.getItem("id")
 var dataObject;
+staffName = localStorage.getItem("staffName")
+
 if(value!=undefined){
+
     const enquiryRef = db
-  .collection("Enquiries");
+  .collection("Enquiries").where("staffName","==",staffName);
 
   enquiryRef
   .get()
@@ -243,7 +248,7 @@ if(value!=undefined){
   document.getElementById('brand').value=dataObject.brand_value;
   document.getElementById('message').value=dataObject.message;
   const [month, day, year] = dataObject.deliveryDate.split('-');
-  const deliveryDate = year+"-"+month+"-"+day
+  const deliveryDate =year+"-"+day+"-"+month
   console.log(deliveryDate)
   document.getElementById('deliveryDate').value=deliveryDate;
   entryDate = dataObject.entryDate;
@@ -411,7 +416,9 @@ function printImg(){
   win.document.write('<img src="' + imgsrc + '" onload="window.print();window.close()" />');
   win.focus();
 }
-
+function editEnquiryElement(){
+  localStorage.setItem("id",undefined);
+}
   </script>
 </body>
 </html>

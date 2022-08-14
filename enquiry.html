@@ -28,7 +28,7 @@
                   <a href="enquiry.html"><i class="fa fa-fw fa-plus"></i>Add Enquiry</a>
                 </li>
                 <li>
-                  <a  href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
+                  <a onclick="editEnquiryElement()" href="enquiries.html" ><i class="fa fa-fw fa-question-circle"></i>Enquiries</a>
                 </li>
                 <li>
                   <a href="editEnquiry.html"><i class="fa fa-fw fa-edit"></i>Edit Enquiry</a>
@@ -156,9 +156,11 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
        var email = user.email;
        document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
        document.getElementById("staffName").innerText = capitalizeFirstLetter(email.split('@')[0]);
+       document.getElementById("staffName").style.display ="none";
        localStorage.setItem("staffName", capitalizeFirstLetter(email.split('@')[0]));
    }		
 });
+
 
 function sessionmanagement() {
        auth.signOut();
@@ -229,11 +231,11 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
 }).catch(err=>{
   alert(err)})
 }
-
 }
   
-
-
+function editEnquiryElement(){
+  localStorage.setItem("id",undefined);
+}
   </script>
 </body>
 </html>
