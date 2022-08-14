@@ -76,15 +76,4 @@ $(document).ready(function () {
   $("#deliveryDate").attr('min', today);
 });
 
-jQuery(document).ready(function($) {
 
-  if (window.history && window.history.pushState) {
-
-    window.history.pushState('forward', null, './#forward');
-
-    $(window).on('popstate', function() {
-      window.location = "index.html"
-    });
-
-  }
-});
