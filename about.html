@@ -36,16 +36,16 @@
          <div class="loader"><img src="images/loading.gif" alt="#" /></div>
       </div>
       <!-- end loader --> 
-      <!-- header -->
-      <header>
+       <!-- header -->
+       <header>
          <!-- header inner -->
-         <div class="header">
+         <div class="header" >
             <div class="head_top">
                <div class="container">
                   <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                        <div class="top-box">
-                        <ul class="sociel_link">
+                        <ul class="sociel_link" style="margin-top: 20px;">
                            <h1 >Meenakshi Control System</h1>
                            <li> <a href="https://www.facebook.com/107596114867335/posts/pfbid02CNcM5Qi8nU6ChG8HokcGwBZRBCeqCayicEvEyib74Wn76Sosm3vKkSwvbEV1tqTAl/?sfnsn=wiwspmo"  target="_blank"><i class="fa fa-facebook"></i></a></li>
                            <li> <a href="https://youtube.com/shorts/5RYrAsTSLCc?feature=share" target="_blank"><i class="fa fa-youtube"></i></a></li>
@@ -54,12 +54,19 @@
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                       <div class="top-box">
-                        <a href="https://www.facebook.com/107596114867335/posts/pfbid02CNcM5Qi8nU6ChG8HokcGwBZRBCeqCayicEvEyib74Wn76Sosm3vKkSwvbEV1tqTAl/?sfnsn=wiwspmo"  target="_blank"><i class="fa fa-phone"></i></a>
-                        <p>+91 8190081807
-                        </p>
-                    </div>
+                     <div class="top-box" style="padding-bottom:30px;">
+                      <a class="buy" onclick="sessionmanagement()" id="join" href="join.html">Login</a>
+                     </p>
                   </div>
+                </div>
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                     <div class="top-box">
+                      <a href="https://www.facebook.com/107596114867335/posts/pfbid02CNcM5Qi8nU6ChG8HokcGwBZRBCeqCayicEvEyib74Wn76Sosm3vKkSwvbEV1tqTAl/?sfnsn=wiwspmo"  target="_blank"><i class="fa fa-phone"></i></a>
+                      <p>+91 8190081807
+                      </p>
+                  </div>
+                </div> -->
+             
                </div>
             </div>
          </div>
@@ -78,19 +85,17 @@
                         <nav class="main-menu">
                            <ul class="menu-area-main">
                               <li> <a href="index.html">Home</a> </li>
-                              <li class="active"> <a href="about.html">About</a> </li>
+                              <li  class="active"> <a href="about.html">About</a> </li>
                               <li> <a href="product.html">product</a> </li>
                               <li> <a href="brands.html"> Brands</a> </li>
-                              <li> <a href="contact.html">Contact</a> </li>  
-                              <li><li>                             
+                              <li> <a href="contact.html">Contact</a> </li>                               
+                              <li><li>
                            </ul>
                         </nav>
                      </div>
                   </div>
                </div>
-               <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                  <li><a class="buy" onclick="sessionmanagement()" id="join" href="join.html">Login</a></li>
-              </div>
+            
             </div>
          </div>
          <!-- end header inner --> 
@@ -339,12 +344,12 @@
        
          </script>
         <script>
-          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"9488928080","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
-            var wa_widgetSetting = {"title":"Saravanan","subTitle":"Hello, if you have any questions about our service then please send me a message.  If I am not offline then I will reply back straightaway.","headerBackgroundColor":"#b5f21d","headerColorScheme":"light","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#000","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"./images/logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
-            window.onload = () => {
-              _waEmbed(wa_btnSetting, wa_widgetSetting);
-            };
-          </script>
+         var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"9488928080","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
+           var wa_widgetSetting = {"title":"Saravanan","subTitle":"Hello, if you have any questions about our service then please send me a message.  If I am not offline then I will reply back straightaway.","headerBackgroundColor":"#b5f21d","headerColorScheme":"light","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#000","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"./images/logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
+           window.onload = () => {
+             _waEmbed(wa_btnSetting, wa_widgetSetting);
+           };
+         </script>
 
 <script>
    const auth = firebase.auth();
