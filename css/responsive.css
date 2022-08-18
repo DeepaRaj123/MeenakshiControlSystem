@@ -140,6 +140,10 @@
         width: 135px;
         height: 175px;
       }
+      .closebutton{
+        display:none;
+      }
+      
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
