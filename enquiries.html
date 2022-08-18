@@ -185,18 +185,18 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
     var booksRef;
     var staffName = localStorage.getItem("staffName");
     if(type===null){
-    booksRef = db.collection("Enquiries").where("staffName","==",staffName);
+    booksRef = db.collection("Enquiries");
     }
     else if(type==="phone"){
     var phoneNumber = document.getElementById("phoneNumber").value;
     if(phoneNumber===""){
-      booksRef = db.collection("Enquiries").where("staffName","==",staffName);
+      booksRef = db.collection("Enquiries");
     }
     else
-    booksRef = db.collection("Enquiries").where("phone","==",phoneNumber).where("staffName","==",staffName);;
+    booksRef = db.collection("Enquiries").where("phone","==",phoneNumber);
     }
     else{
-    booksRef = db.collection("Enquiries").where("status", "==", type).where("staffName","==",staffName);
+    booksRef = db.collection("Enquiries").where("status", "==", type);
     }
 
 booksRef
@@ -232,7 +232,7 @@ for(var i=0;i<data.length;i++){
   var enquiryName = "Edit Enquiry";
 
   if(data[i].status==="Completed"){
-    var enquiryName = "Enquiry closed"
+    var enquiryName = "Enquiry closed by "+data[i].staffName
     var value = "closed"
   }
   else{

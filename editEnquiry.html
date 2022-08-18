@@ -148,7 +148,7 @@
             </select>
             <div class="form-item">
               <input type="Date" id="deliveryDate">
-              <label>Expected Date of Delivery:*</label>
+              <label id="dateLabel" >Expected Date of Delivery:*</label>
             </div>
                   <div class="form-item">
                     <textarea class="" id="message" required></textarea>
@@ -228,7 +228,7 @@ staffName = localStorage.getItem("staffName")
 if(value!=undefined){
 
     const enquiryRef = db
-  .collection("Enquiries").where("staffName","==",staffName);
+  .collection("Enquiries");
 
   enquiryRef
   .get()
@@ -419,6 +419,8 @@ function printImg(){
 function editEnquiryElement(){
   localStorage.setItem("id",undefined);
 }
+
+
   </script>
 </body>
 </html>
