@@ -136,6 +136,10 @@
       .analyticslabel{
         font-size: small;
       }
+      .card-wrap{
+        width: 135px;
+        height: 175px;
+      }
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
