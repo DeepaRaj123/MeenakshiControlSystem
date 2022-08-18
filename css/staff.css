@@ -672,13 +672,15 @@ overflow: hidden;
 .statistics{
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to right, #8e9eab, #eef2f3); 
-  height: 80vh;
+  height: auto;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
 }
+
 .card-wrap{
   width: 270px;
   height: 350px;
@@ -767,3 +769,4 @@ overflow: hidden;
 .closebutton{
   display:block;
 }
+

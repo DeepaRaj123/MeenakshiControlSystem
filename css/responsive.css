@@ -129,15 +129,19 @@
         top: 0;
     }
     .statistics{
-        height: 180vh;
-        gap:10px;
+        font-family: 'Roboto', sans-serif;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
       }
       .analyticslabel{
         font-size: small;
       }
       .card-wrap{
-        width: 135px;
-        height: 175px;
+        width: 150px;
+        height: 250px;
       }
       .closebutton{
         display:none;
@@ -148,12 +152,51 @@
       .headerphone{
         width:200px;
       }
+      .contact-links{
+        display:none;
+      }
+
+      .contact-form-wrapper {
+        background-color: #ffffff8f;
+        border-radius: 0 10px 10px 0;
+      }
+      
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
     .banner-main .carousel-caption {
         background: transparent;
     }
+    .contact-links, .contact-form-wrapper {
+        width: 50%;
+        padding: 8% 5% 10% 5%;
+      }
+      
+      
+      .contact-links {
+        background-color: #1f2e43;
+        background:
+          radial-gradient(
+            circle at 55% 92%, #426691 0 12%, transparent 12.2%
+          ), 
+          radial-gradient(
+            circle at 94% 72%, #426691 0 10%, transparent 10.2%
+          ), 
+          radial-gradient(
+            circle at 20% max(78%, 350px), #263a53 0 7%, transparent 7.2%
+          ), 
+          radial-gradient(
+            circle at 0% 0%, #263a53 0 40%, transparent 40.2%
+          ), 
+          #1f2e43;
+        border-radius: 10px 0 0 10px;
+      }
+      
+      .contact-form-wrapper {
+        background-color: #ffffff8f;
+        border-radius: 0 10px 10px 0;
+      }
+      
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -195,6 +238,36 @@
         width: 26px;
         height: 26px;
     }
+    .contact-links, .contact-form-wrapper {
+        width: 50%;
+        padding: 8% 5% 10% 5%;
+      }
+      
+      
+      .contact-links {
+        background-color: #1f2e43;
+        background:
+          radial-gradient(
+            circle at 55% 92%, #426691 0 12%, transparent 12.2%
+          ), 
+          radial-gradient(
+            circle at 94% 72%, #426691 0 10%, transparent 10.2%
+          ), 
+          radial-gradient(
+            circle at 20% max(78%, 350px), #263a53 0 7%, transparent 7.2%
+          ), 
+          radial-gradient(
+            circle at 0% 0%, #263a53 0 40%, transparent 40.2%
+          ), 
+          #1f2e43;
+        border-radius: 10px 0 0 10px;
+      }
+      
+      .contact-form-wrapper {
+        background-color: #ffffff8f;
+        border-radius: 0 10px 10px 0;
+      }
+      
     .choose_bg .white_bg .for_box h3 {font-size: 22px;}
     .choose_bg .white_bg .for_box p {font-size: 16px;}
     .product-bg .product-bg-white .product-box h3 {font-size: 13px;}

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
         <!-- mobile metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <title>Meenakshi Control System</title>
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+        <title>Meenakshi Control System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/enquiries.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/staff.css">
+<!-- <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'><link rel="stylesheet" href="./css/responsive.css"> -->
 
 </head>
 <body>
@@ -98,17 +98,17 @@
              </div>
             </div>
           </div>
-            <div style=" height: 15vh;
+            <div id="headphone" style=" height: 15vh; 
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #af77d6;">
-            <div id="headerphone" class="input-box open">
+            background: #af77d6; width: auto;">
+            <div id="headerphone"  class="input-box open" style="width: auto;">
               <input id="phoneNumber" type="text" placeholder="Search with PhoneNumber...">
               <span class="icon">
-                <i onclick="getData('phone')" class="fa fa-search"></i>
+                <i  onclick="getData('phone')" class="fa fa-search"></i>
               </span>
-              <i id="closebutton" class="fa fa-close"></i>
+              <i id="closebutton"class="fa fa-close"></i>
             </div>
            
           </div>
