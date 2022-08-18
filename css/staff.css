@@ -665,6 +665,10 @@ overflow: hidden;
   --card4-gradient-color1: #11998e;
   --card4-gradient-color2: #38ef7d;
 }
+
+.analyticslabel{
+  font-size: large;
+}
 .statistics{
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to right, #8e9eab, #eef2f3); 

@@ -133,6 +133,9 @@
         height: 80vh;
         gap:10px;
       }
+      .analyticslabel{
+        font-size: small;
+      }
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
