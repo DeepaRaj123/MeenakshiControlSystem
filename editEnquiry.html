@@ -229,7 +229,6 @@ if(value!=undefined){
   .collection("Enquiries")
   .where("phone","==",value);
   console.log(value)
-  console.log("7907316810")
 
   db
   .collection("Enquiries")
@@ -240,6 +239,7 @@ if(value!=undefined){
       ...doc.data(),
     }));
   var entryDate;
+  console.log(data[0])
 
   dataObject = data[0];
   document.getElementById("name").value=dataObject.name;
