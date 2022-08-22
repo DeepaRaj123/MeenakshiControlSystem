@@ -277,8 +277,12 @@ for(var i=0;i<data.length;i++){
   else{
   var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
   var entryDate = data[i].entryDate;
-  var deliveryDate = data[i].deliveryDate;
   var enquiryName = "Edit Enquiry";
+  if(data[i].deliveryDate===undefined||data[i].deliveryDate==="undefined-undefined-"){
+    var deliveryDate = "In Progress"
+  }else{
+    var deliveryDate = data[i].deliveryDate;
+  }
 
   if(data[i].status==="Completed"){
     var enquiryName = "Enquiry closed by "+data[i].staffName
@@ -286,7 +290,7 @@ for(var i=0;i<data.length;i++){
   }
   else{
     var enquiryName = "Edit Enquiry"
-    var value = data[i].phone;
+    var value =data[i].phone;
   }
 
   if(data[i].price===undefined){
@@ -295,7 +299,6 @@ for(var i=0;i<data.length;i++){
   else{
     var priceValue = data[i].price
   }
-
   htmlCode =
     htmlCode +
     `
