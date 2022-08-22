@@ -229,16 +229,20 @@ for(var i=0;i<data.length;i++){
   var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
   var entryDate = data[i].entryDate;
   var enquiryName = "Edit Enquiry";
+console.log(data[i].deliveryDate)
+  if(data[i].deliveryDate!=undefined){
+    var deliveryDate = data[i].deliveryDate;
+  }else{
+    var deliveryDate = "In Progress"
+  }
 
   if(data[i].status==="Completed"){
     var enquiryName = "Enquiry closed by "+data[i].staffName
     var value = "closed"
-    var deliveryDate = data[i].deliveryDate;
   }
   else{
     var enquiryName = "Edit Enquiry"
     var value =data[i].phone;
-    var deliveryDate = "In Progress"
   }
 
   if(data[i].price===undefined){
