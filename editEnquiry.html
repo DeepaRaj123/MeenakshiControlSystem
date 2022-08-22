@@ -146,7 +146,7 @@
                 <option value="Siemens">Siemens</option>
 
             </select>
-            <div class="form-item">
+            <div class="form-item" id="deliveryDate_Form">
               <input type="Date" id="deliveryDate">
               <label id="dateLabel" >Expected Date of Delivery:*</label>
             </div>
@@ -224,21 +224,24 @@ function sessionmanagement() {
 value = localStorage.getItem("id")
 var dataObject;
 staffName = localStorage.getItem("staffName")
-
 if(value!=undefined){
-
     const enquiryRef = db
-  .collection("Enquiries");
+  .collection("Enquiries")
+  .where("phone","==",value);
+  console.log(value)
+  console.log("7907316810")
 
-  enquiryRef
-  .get()
+  db
+  .collection("Enquiries")
+  .where("phone","==",value.toString()).get()
   .then((snapshot) => {
     const data = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
   var entryDate;
-  dataObject = data[value];
+
+  dataObject = data[0];
   document.getElementById("name").value=dataObject.name;
   document.getElementById("email").value=dataObject.email;
   document.getElementById("phone").value=dataObject.phone;
@@ -247,10 +250,9 @@ if(value!=undefined){
   document.getElementById('service').value=dataObject.service_value;
   document.getElementById('brand').value=dataObject.brand_value;
   document.getElementById('message').value=dataObject.message;
-  const [month, day, year] = dataObject.deliveryDate.split('-');
-  const deliveryDate =year+"-"+day+"-"+month
-  console.log(deliveryDate)
-  document.getElementById('deliveryDate').value=deliveryDate;
+  // const [month, day, year] = dataObject.deliveryDate.split('-');
+  // const deliveryDate =year+"-"+day+"-"+month
+  // document.getElementById('deliveryDate').value=deliveryDate;
   entryDate = dataObject.entryDate;
 //  document.getElementById('deliveryDate').value="2008-09-05"
   if(dataObject.status==="Hold"){
@@ -262,6 +264,7 @@ if(value!=undefined){
     document.getElementById("price").value = dataObject.price;
     document.getElementById("technician").style.display = "block";
     document.getElementById("technician").value = dataObject.technician;
+    document.getElementById("deliveryDate_Form").style.display = "block"; 
 
     if(dataObject.qrCodeURL===undefined){
       document.getElementById("videoitem").style.display = "block";
@@ -317,7 +320,7 @@ function savequery()
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    completedDate = dd + '/' + mm + '/' + yyyy;   
+    completedDate = dd + '/' + mm + '/' + yyyy;  
   }
   let newQuery = {
   name: name,
@@ -363,21 +366,24 @@ function toggle(){
   status_value = status.options[status.selectedIndex].value;
   if(status_value=="Hold"){
     document.getElementById("reasonitem").style.display = "block";
+    document.getElementById("deliveryDate_Form").style.display = "none";
   }
   else{
     document.getElementById("reasonitem").style.display = "none";
+    document.getElementById("deliveryDate_Form").style.display = "none";
   }
 
   if(status_value=="Completed"){
     document.getElementById("priceitem").style.display = "block";
     document.getElementById("technician").style.display = "block";
     document.getElementById("videoitem").style.display = "block";
- 
+    document.getElementById("deliveryDate_Form").style.display = "block";
   }
   else{
     document.getElementById("priceitem").style.display = "none";
     document.getElementById("technician").style.display = "none";
     document.getElementById("videoitem").style.display = "none";
+    document.getElementById("deliveryDate_Form").style.display = "none";
 
   }
 }
@@ -419,6 +425,7 @@ function printImg(){
 function editEnquiryElement(){
   localStorage.setItem("id",undefined);
 }
+document.getElementById("deliveryDate_Form").style.display = "none";
 
 
   </script>

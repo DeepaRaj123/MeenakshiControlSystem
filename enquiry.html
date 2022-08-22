@@ -104,10 +104,10 @@
                 <option value="Siemens">Siemens</option>
 
             </select>
-            <div class="form-item">
+            <!-- <div class="form-item">
               <input type="Date" id="deliveryDate">
               <label>Expected Date of Delivery:*</label>
-            </div>
+            </div> -->
            
                   <div class="form-item">
                     <textarea class="" id="message" required></textarea>
@@ -182,8 +182,8 @@ function savequery()
   var brand_value = brand.options[brand.selectedIndex].value;
   var message = document.getElementById('message').value;
   var staffName = document.getElementById("staffName").innerText;
-  const [month, day, year] = document.getElementById("deliveryDate").value.split('-');
-  const deliveryDate = year+"-"+day+"-"+month
+  // const [month, day, year] = document.getElementById("deliveryDate").value.split('-');
+  // const deliveryDate = year+"-"+day+"-"+month
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -191,7 +191,6 @@ function savequery()
   var yyyy = today.getFullYear();
 
 today = dd + '/' + mm + '/' + yyyy;
-  console.log(/^\d{10}$/.test(phone));
 
   if(phone===""||service_value===""||brand_value===""||message===""){
     alert("Phone/typeOfService/brand/Issue missing!")
@@ -211,8 +210,8 @@ today = dd + '/' + mm + '/' + yyyy;
   message:message,
   staffName:staffName,
   status:"Enquiry Received",
-  entryDate : today,
-  deliveryDate:deliveryDate
+  entryDate : today
+  //deliveryDate:deliveryDate
 };
 
 // Add a new document in collection "cities" with ID 'LA'
@@ -225,7 +224,7 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
   document.getElementById('service').value="";
   document.getElementById('brand').value="";
   document.getElementById('message').value="";
-  document.getElementById('deliveryDate').value="";
+ // document.getElementById('deliveryDate').value="";
   document.getElementById("staffName").innerText="";
   window.location = "enquiries.html";
 }).catch(err=>{
