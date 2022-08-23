@@ -80,6 +80,15 @@
              </div>
             </div>
             <div class="card-wrap">
+              <div class="card-header five">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="card-content">
+                <h1 class="card-title" id="Testing OK">0</h1>
+                <button class="card-btn five">Testing OK</button>
+             </div>
+            </div>
+            <div class="card-wrap">
               <div class="card-header one">
                 <i class="fa fa-pause"></i>
               </div>
@@ -121,6 +130,7 @@
             <button class="btn active" onclick="filterSelection('all')"> Show all</button>
             <button class="btn" onclick="filterSelection('Enquiry Received')"> Enquiry Received</button>
             <button class="btn" onclick="filterSelection('Work started')"> Work started</button>
+            <button class="btn" onclick="filterSelection('Testing OK')"> Testing OK</button>
             <button class="btn" onclick="filterSelection('Hold')">Hold</button>
             <button class="btn" onclick="filterSelection('Completed')">Completed</button>
           </div>
@@ -274,6 +284,8 @@ for(var i=0;i<data.length;i++){
   var color='linear-gradient(65deg, rgb(0,250,0), rgb(255,255,255))';}
   else if(data[i].status==="Work started"){
   var color='linear-gradient(45deg, rgb(0,150,150), rgb(255,255,255))';}
+  else if(data[i].status==="Testing OK"){
+  var color='linear-gradient(45deg, rgb(255,192,203), rgb(255,255,255))';}
   else{
   var color='linear-gradient(65deg, rgb(231, 215, 233), rgb(226, 138, 240))';}
   var entryDate = data[i].entryDate;
@@ -360,7 +372,7 @@ function  filterSelection(type){
       }
 }
 getData(null);
-var Hold=0,Enquiry=0,completed=0,work=0;
+var Hold=0,Enquiry=0,completed=0,work=0,testing=0;
 var staffName = localStorage.getItem("staffName");
 
 
@@ -380,11 +392,14 @@ for(var i=0;i<data.length;i++){
   completed++
   if(data[i].status==="Work started")
   work++
+  if(data[i].status==="Testing OK")
+  testing++
 }
 document.getElementById('Hold').innerHTML  = Hold;
 document.getElementById('Enquiry Received').innerHTML  = Enquiry;
 document.getElementById('Completed').innerHTML  = completed;
 document.getElementById('Work Started').innerHTML  = work;
+document.getElementById('Testing OK').innerHTML  = testing;
 
   });
 

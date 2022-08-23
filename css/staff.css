@@ -664,6 +664,9 @@ overflow: hidden;
   --card3-gradient-color2: #a8c0ff;
   --card4-gradient-color1: #11998e;
   --card4-gradient-color2: #38ef7d;
+  --card5-gradient-color1: #FFC0CB;
+  --card5-gradient-color2: #FF0833;
+
 }
 
 .analyticslabel{
@@ -700,7 +703,7 @@ overflow: hidden;
 .card-header{
   height: 200px;
   width: 100%;
-  background: red;
+  background: rgb(255, 192, 203);
   border-radius:100% 0% 100% 0% / 0% 50% 50% 100%;
   display: grid;
   place-items: center;
@@ -751,6 +754,9 @@ overflow: hidden;
 .card-header.four{
   background: linear-gradient(to bottom left, var(--card4-gradient-color1), var(--card4-gradient-color2));
 }
+.card-header.five{
+  background: linear-gradient(to bottom left, var(--card5-gradient-color1), var(--card5-gradient-color2));
+}
 
 .card-btn.one{
   background: linear-gradient(to left, var(--card1-gradient-color1), var(--card1-gradient-color2));
@@ -763,6 +769,9 @@ overflow: hidden;
 }
 .card-btn.four{
   background: linear-gradient(to left, var(--card4-gradient-color1), var(--card4-gradient-color2));
+}
+.card-btn.five{
+  background: linear-gradient(to left, var(--card5-gradient-color1), var(--card5-gradient-color2));
 }
 /* End */
 
