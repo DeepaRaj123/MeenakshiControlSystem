@@ -219,6 +219,7 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
 function sessionmanagement() {
        auth.signOut();
        localStorage.setItem("staffName","");
+       localStorage.setItem("_id", null);
        window.location = "join.html";
 
 }
@@ -424,7 +425,7 @@ function printImg(){
   win.focus();
 }
 function editEnquiryElement(){
-  localStorage.setItem("id",undefined);
+  localStorage.setItem("id",null);
 }
 document.getElementById("deliveryDate_Form").style.display = "none";
 

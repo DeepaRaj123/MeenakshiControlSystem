@@ -152,7 +152,8 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
 <script>
     const auth = firebase.auth();
     auth.onAuthStateChanged(function(user){
-   
+      var _id = localStorage.getItem("_id");
+      console.log(_id)
    if(user){
        var email = user.email;
        document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
@@ -164,6 +165,8 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
 
 function sessionmanagement() {
        auth.signOut();
+       localStorage.setItem("staffEmail","");
+       localStorage.setItem("_id", null);
        window.location = "join.html";
 }
 function capitalizeFirstLetter(string) {
@@ -172,13 +175,12 @@ function capitalizeFirstLetter(string) {
 
 function saveprofile()
 {
-  var id = localStorage.getItem("id")
+  var _id = localStorage.getItem("_id");
 
   var name =  document.getElementById("name").value;
   var email =  document.getElementById("email").value;
   var phone =  document.getElementById("phone").value;
   var address =  document.getElementById("address").value;
-
 
   if(phone===""){
     alert("PhoneNumber is missing!")
@@ -195,10 +197,11 @@ function saveprofile()
   phone: phone,
   address:address
 };
-
-if(id===null){
+if(_id=="null"){
     db.collection('StaffProfiles').doc().set(newQuery).then(result=>{
   alert("Profile Added Successfully");
+  window.location.reload();
+  gotoupdate();
   document.getElementById("name").value="";
   document.getElementById("email").value="";
   document.getElementById("phone").value="";
@@ -208,18 +211,18 @@ if(id===null){
 }).catch(err=>{
   alert(err)})
 }
-
 else{
 // Add a new document in collection "cities" with ID 'LA'
-db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
+db.collection('StaffProfiles').doc(_id).set(newQuery).then(result=>{
   alert("Profile Updated Successfully");
+  window.location.reload();
+  gotoupdate();
   document.getElementById("name").value="";
   document.getElementById("email").value="";
   document.getElementById("phone").value="";
   document.getElementById("address").value="";
   updateprofile.style.display = "none";
   profilecontainer.style.display = "block"
-  gotoupdate()
 }).catch(err=>{
   alert(err)})
 }
@@ -232,6 +235,7 @@ db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
 
   <script>
   document.getElementById("name").value=localStorage.getItem("staffName");
+  console.log(localStorage.getItem("staffEmail"))
   document.getElementById("email").value=localStorage.getItem("staffEmail");
 
     var profilecontainer = document.getElementById("profilecontainer");
@@ -241,11 +245,10 @@ db.collection('StaffProfiles').doc(id).set(newQuery).then(result=>{
   db.collection("StaffProfiles").where("name","==",localStorage.getItem("staffName"))
                     .get()
                     .then(function(querySnapshot) {
-
-
                         querySnapshot.forEach(function(doc) {
+                          localStorage.setItem("_id", doc.id);
                             var data = doc.data();
-                            console.log(data)
+                            console.log(doc.id)
                             if(data.length===0){
                                  updateprofile.style.display = "block";
                                  profilecontainer.style.display = "none";
@@ -282,7 +285,6 @@ function  gotoupdate(){
                                 document.getElementById("email").value =data.email;
                                 document.getElementById("phone").value =data.phone;
                                 document.getElementById("address").value =data.address;
-                                localStorage.setItem("id", doc.id);
                         });
                     })
                     .catch(function(error) {

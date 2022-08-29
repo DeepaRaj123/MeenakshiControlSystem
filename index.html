@@ -429,7 +429,7 @@
             </div>
          </div>
             <div class="copyright">
-               <p>Copyright 2022 All Right Reserved By <a href="#">ADSoft Technologies</a></p>
+               <p>Copyright 2022 All Right Reserved By <a href="#">AD Soft Technologies</a></p>
             </div>
          
       </div>
@@ -508,6 +508,7 @@ if(user){
 function sessionmanagement() {
 if( document.getElementById("join").innerText==="Log In")
 {
+   localStorage.setItem("_id", null);
     window.location = "join.html";
 }
 else

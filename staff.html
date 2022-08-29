@@ -176,11 +176,13 @@ appId: "1:227334513595:web:34b07bf770e2c7d81bda9e"
        var email = user.email;
        document.getElementById("username").innerText = capitalizeFirstLetter(email.split('@')[0]);
        localStorage.setItem("staffName", capitalizeFirstLetter(email.split('@')[0]));
+       localStorage.setItem("staffEmail", email);
    }		
 });
 
 function sessionmanagement() {
        auth.signOut();
+       localStorage.setItem("_id", null);
        window.location = "join.html";
 }
 function capitalizeFirstLetter(string) {
@@ -199,7 +201,6 @@ function savequery()
   var brand_value = brand.options[brand.selectedIndex].value;
   var message = document.getElementById('message').value;
   var staffName = document.getElementById("staffName").innerText;
-  console.log(/^\d{10}$/.test(phone));
 
   if(phone===""||service_value===""||brand_value===""||message===""){
     alert("Phone/typeOfService/brand/Issue missing!")
@@ -243,7 +244,6 @@ db.collection('Enquiries').doc().set(newQuery).then(result=>{
     var staffName = localStorage.getItem("staffName");
     if(type===null){
     booksRef = db.collection("Enquiries")
-
     }
     else if(type==="phone"){
     var phoneNumber = document.getElementById("phoneNumber").value;
